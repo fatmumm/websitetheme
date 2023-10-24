@@ -1,0 +1,166 @@
+
+<style>
+  .enterhometest {
+  height:100vh;
+  width:100%;
+  background-size:cover;
+  background-position:center center;
+  background-attachment:fixed;
+  position:absolute;
+  top:0;
+  display:flex;
+  justify-content:{{ section.settings.vertical_alignment }};
+  align-items:center;
+  flex-direction:column;
+}
+</style>
+<div class="enterhometest">
+  <div class="testrow2">
+    <div class="testcolumn2">
+      <a class="logo-button">
+        <img srcset="{{ section.settings.logo | image_url }}" class="logo-image" />
+      </a>
+    </div>
+  </div>
+  <div class="testrow">
+    <div class="testcolumn">
+      <a data-action="url" href="{{ section.settings.enter_url }}" target="_self" class="enter-button">
+        <p class="enter-text">{{ section.settings.enter }}</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% style %}
+
+.logo-button {  
+  display:block;
+  cursor:default!important;
+}    
+  
+.logo-button img {
+  width: {{ section.settings.desktop_logo_width }}px;
+  height:auto;
+}
+
+.enter-button {
+  text-decoration:none;
+}
+    
+.enter-text {
+  font-size: {{ section.settings.enter_size }}px;
+  color: {{ section.settings.enter_color }};
+}
+
+.enter-text {
+  {% if section.settings.enable_txt_shadow %}
+   text-shadow:4px 4px {{section.settings.enter_shadow_clr}};
+    {% endif %}
+}
+
+{% endstyle %}
+{% schema %}
+  {
+    "name": "FKX Enter Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "desktop_logo_width",
+        "label": "Desktop logo width",
+        "default": 500,
+        "min": 80,
+        "max": 800,
+        "step": 10,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_logo_width",
+        "label": "Mobile logo width",
+        "default": 250,
+        "min": 50,
+        "max": 400,
+        "step": 10,
+        "unit": "px",
+        "info": "Set as a max-width, may appear smaller"
+      },
+      {
+        "type": "header",
+        "content": "text"
+      },
+      {
+        "type": "text",
+        "id": "enter",
+        "label": "Button Text"
+      },
+            {
+  "type": "select",
+  "id": "vertical_alignment",
+  "label": "Select Button Alignment",
+  "options": [
+    {
+      "value": "flex-start",
+      "label": "Top"
+    },
+    {
+      "value": "Center",
+      "label": "Center"
+    },
+    {
+      "value": "flex-end",
+      "label": "Bottom"
+    }
+  ],
+  "default": "Center"
+},
+      {
+        "type": "range",
+        "id": "enter_size",
+        "label": "Button Size",
+        "default": 20,
+        "min": 10,
+        "max": 70,
+        "step": 5,
+        "unit": "px"
+      },
+      {
+        "type": "url",
+        "id": "enter_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "color",
+        "id": "enter_color",
+        "label": "Button Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_txt_shadow",
+        "label": "Enable Enter Text Shadow",
+        "default": false
+      },
+          {
+        "type": "color",
+        "id": "enter_shadow_clr",
+        "label": "Shadow Color"
+      }
+      
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
